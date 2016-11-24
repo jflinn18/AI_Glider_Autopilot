@@ -84,6 +84,12 @@ void loop() {
 
     // update the filter, which computes orientation
     filter.updateIMU(gx, gy, gz, ax, ay, az);
+    
+    
+    // This needs to be filter.update(gx,gy,gz,ax,ay,az,mx,my,mz);
+    //     This will probably fix the heading problem. But I have to figure out
+    //     how to read the magnetometer correctly.
+    
 
     // print the heading, pitch and roll
     roll = filter.getRoll();
