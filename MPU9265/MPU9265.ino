@@ -127,18 +127,17 @@ void loop()
   // _____________________
   // :::  Magnetometer ::: 
  
- 
+  /*
   // Read register Status 1 and wait for the DRDY: Data Ready
- 
   uint8_t ST1;
   do
   {
     I2Cread(MAG_ADDRESS,0x02,1,&ST1);
   }
-  while (!(ST1&0x01));
- 
+  while (!(ST1&0x01));// Gets stuck in an infinite loop, but the values don't change at all if we don't do this.
+  
   // Read magnetometer data  
- /* uint8_t Mag[7];  
+  uint8_t Mag[7];  
   I2Cread(MAG_ADDRESS,0x03,7,Mag);
  
  
@@ -163,5 +162,5 @@ void loop()
  
   // End of line
   Serial.println("");
-//  delay(100);    
+  delay(10);    
 }
