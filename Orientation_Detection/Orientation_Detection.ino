@@ -15,6 +15,8 @@
 #define    ACC_FULL_SCALE_8_G        0x10
 #define    ACC_FULL_SCALE_16_G       0x18
 
+#define    M_PI 3.14159265
+
 
 Madgwick filter;
 unsigned long microsPerReading, microsPrevious;
@@ -97,7 +99,10 @@ void loop() {
     roll = filter.getRoll();
     pitch = filter.getPitch();
     heading = filter.getYaw();
-    Serial.print("Orientation: ");
+    
+    //heading = 180*atan(az/sqrt(ax*ax+ay*ay))/M_PI;
+    
+    //Serial.print("Orientation: ");
     Serial.print(heading);
     Serial.print(" ");
     Serial.print(pitch);
