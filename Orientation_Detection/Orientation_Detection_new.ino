@@ -84,6 +84,14 @@ void loop() {
 
     // update the filter, which computes orientation
     filter.updateIMU(gx, gy, gz, ax, ay, az);
+    
+    
+    // This needs to be filter.update(gx,gy,gz,ax,ay,az,mx,my,mz);
+    //     This will probably fix the heading problem. But I have to figure out
+    //     how to read the magnetometer correctly.
+    
+    // This may be working. However, the degree may be off for the heading. Do some experimenting.
+    
 
     // print the heading, pitch and roll
     roll = filter.getRoll();
@@ -149,7 +157,7 @@ void I2CwriteByte(uint8_t Address, uint8_t Register, uint8_t Data)
 }
 
 
-void GetMPUData(int16_t aix, int16_t aiy, int16_t aiz, int16_t gix, int16_t giy, int16_t giz)
+void GetMPUData(int16_t* aix, int16_t* aiy, int16_t* aiz, int16_t* gix, int16_t* giy, int16_t* giz)
 {
     // ____________________________________
   // :::  accelerometer and gyroscope ::: 
@@ -162,14 +170,14 @@ void GetMPUData(int16_t aix, int16_t aiy, int16_t aiz, int16_t gix, int16_t giy,
   // Create 16 bits values from 8 bits data
  
   // Accelerometer
-  int16_t ax=-(Buf[0]<<8 | Buf[1]);
-  int16_t ay=-(Buf[2]<<8 | Buf[3]);
-  int16_t az=Buf[4]<<8 | Buf[5];
+  *aix=-(Buf[0]<<8 | Buf[1]);
+  *aiy=-(Buf[2]<<8 | Buf[3]);
+  *aiz=Buf[4]<<8 | Buf[5];
  
   // Gyroscope
-  int16_t gx=-(Buf[8]<<8 | Buf[9]);
-  int16_t gy=-(Buf[10]<<8 | Buf[11]);
-  int16_t gz=Buf[12]<<8 | Buf[13]; 
+  *gix=-(Buf[8]<<8 | Buf[9]);
+  *giy=-(Buf[10]<<8 | Buf[11]);
+  *giz=Buf[12]<<8 | Buf[13]; 
  
   /*
   // _____________________

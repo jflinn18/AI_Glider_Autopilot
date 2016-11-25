@@ -49,7 +49,6 @@ void I2CwriteByte(uint8_t Address, uint8_t Register, uint8_t Data)
   Wire.endTransmission();
 }
  
- 
 // Initializations
 void setup()
 {
@@ -84,7 +83,7 @@ void loop()
   Serial.print ("\t");
  
  
- 
+  
   // ____________________________________
   // :::  accelerometer and gyroscope ::: 
  
@@ -123,11 +122,11 @@ void loop()
   Serial.print (gz,DEC);  
   Serial.print ("\t");
  
- 
+  
   // _____________________
   // :::  Magnetometer ::: 
  
-  /*
+  
   // Read register Status 1 and wait for the DRDY: Data Ready
   uint8_t ST1;
   do
@@ -136,19 +135,20 @@ void loop()
   }
   while (!(ST1&0x01));// Gets stuck in an infinite loop, but the values don't change at all if we don't do this.
   
+  
   // Read magnetometer data  
   uint8_t Mag[7];  
   I2Cread(MAG_ADDRESS,0x03,7,Mag);
  
  
   // Create 16 bits values from 8 bits data
- 
+  
   // Magnetometer
   int16_t mx=-(Mag[3]<<8 | Mag[2]);
   int16_t my=-(Mag[1]<<8 | Mag[0]);
   int16_t mz=-(Mag[5]<<8 | Mag[4]);
- 
- 
+  
+
   // Magnetometer
   Serial.print (mx+200,DEC); 
   Serial.print ("\t");
@@ -156,11 +156,9 @@ void loop()
   Serial.print ("\t");
   Serial.print (mz-700,DEC);  
   Serial.print ("\t");
-  */
- 
- 
+   
  
   // End of line
   Serial.println("");
-  delay(10);    
+  delay(100);    
 }
