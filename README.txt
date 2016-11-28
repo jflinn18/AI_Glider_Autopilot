@@ -1,0 +1,3 @@
+The project hit a slight bump in the road. The way that I was approaching the problem was constantly reading in data from the sensor and streaming it to the serial port. A couple of days into the start of the project, I realized that the rate at which the data was coming through the serial port was too fast for the code on the laptop side to handle (since I was doing some math operations on the laptop and displaying the results with matplotlib). 
+
+The new approach is sending a "data-request" signal from the laptop to the arduino. Once this signal is sent, the arduino fires off a function and requests the data from the sensor. This way the data stream to the laptop will not be constantly growing if the laptop cannot crunch and display the data fast enough.
